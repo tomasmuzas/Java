@@ -1,5 +1,5 @@
 /**
- * @author Tomas Muuzas, PS 2 grupe
+ * @author Tomas Muzas, PS 2 grupe
  * Zaidimas, paremtas arcade zaidimu Pac-Man 
  * (supaprastinta versija)
  * zaidimas valdomas rodykliu mygtukais arba WASD mygtukais
