@@ -17,7 +17,7 @@ public class Main {
 		
 		
 		PacmanGame game = new PacmanGame();
-		game.start();
+		game.start(args[0]);
 		
 	}
 }

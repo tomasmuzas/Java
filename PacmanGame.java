@@ -2,6 +2,7 @@ package lt.vu.mif.pacman;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.JFrame;
 
@@ -26,8 +27,9 @@ public class PacmanGame {
 	/**
 	 * Prepares all the needed game objects, starts their threads, if existent, and launches the game
 	 */
-	public void start(){
-		ParametersIO.readSettings("C:\\Users\\Tomas\\workspace\\MIF\\src\\params.config"); // read the settings from the file
+	public void start(String parametersPath){
+		
+		ParametersIO.readSettings(parametersPath); // read the settings from the file
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 		
