@@ -3,10 +3,11 @@ package lt.vu.mif.pacman.gameObjects;
 import java.awt.*;
 import javax.swing.JLabel;
 
+import lt.vu.mif.pacman.GUI.Drawable;
 import lt.vu.mif.pacman.IO.Parameters;
 
 
-public class GameObject extends JLabel{
+public class GameObject extends JLabel implements Drawable{
 	/**
 	 * Getters and setters
 	 */

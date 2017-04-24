@@ -2,7 +2,6 @@ package lt.vu.mif.pacman;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.swing.JFrame;
 
@@ -11,6 +10,7 @@ import lt.vu.mif.pacman.IO.Parameters;
 import lt.vu.mif.pacman.IO.ParametersIO;
 import lt.vu.mif.pacman.gameObjects.Enemy;
 import lt.vu.mif.pacman.gameObjects.GameMap;
+import lt.vu.mif.pacman.gameObjects.GameObjectCreator;
 import lt.vu.mif.pacman.gameObjects.Player;
 
 public class PacmanGame {
@@ -94,7 +94,8 @@ public class PacmanGame {
 	 * @param posY[int] - initial position of Player, Y coordinate
 	 */
 	public void createPlayer(int posX, int posY){
-		mainPlayer =  new Player(posX,posY, Color.yellow);
+		
+		mainPlayer =  (Player) GameObjectCreator.createGameObject("Player", posX,posY, Color.yellow);
 		mainPlayer.setMapInstance(map);
 		mainPlayer.setGameInstance(this);
 	}
@@ -104,7 +105,7 @@ public class PacmanGame {
 	 * @param posY[int] - initial position of Enemy, Y coordinate
 	 */
 	public void createEnemy(int posX, int posY){
-		Enemy enemy  = new Enemy(posX, posY, Parameters.enemyColors[enemyCount++]);
+		Enemy enemy  = (Enemy) GameObjectCreator.createGameObject("Enemy",posX, posY, Parameters.enemyColors[enemyCount++]);
 		allEnemies.add(enemy);
 	}
 	
