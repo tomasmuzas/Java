@@ -81,9 +81,9 @@ public class ParametersIO {
 	 */
 	public static void writeLevel(GameMap map, Player mainPlayer, ArrayList<Enemy> enemies){
 		String output = "";
-		ArrayList<ArrayList<Tile>> mapArray = map.getMap();
-		for(int i = 0; i < mapArray.size();i++){
-			for(int j = 0; j < mapArray.get(i).size();j++){
+		//ArrayList<ArrayList<Tile>> mapArray = map.getMap();
+		for(int i = 0; i < map.getArrayHeight();i++){
+			for(int j = 0; j < map.getArrayWidth();j++){
 				boolean enemyFound = false;
 				for(int k = 0; k < enemies.size(); k++){
 					if(enemies.get(k).getPosY()/Parameters.TILE_SIZE == i && enemies.get(k).getPosX()/Parameters.TILE_SIZE == j){
@@ -97,13 +97,13 @@ public class ParametersIO {
 				else if(mainPlayer.getPosY()/Parameters.TILE_SIZE == i && mainPlayer.getPosX()/Parameters.TILE_SIZE == j){
 					output+=Parameters.PLAYER_CHAR;
 				}
-				else if(mapArray.get(i).get(j).hasFood()){
+				else if(map.getTileAt(i,j).hasFood()){
 					output+=Parameters.FOOD_CHAR;
 				}
-				else if(!mapArray.get(i).get(j).hasFood() && !mapArray.get(i).get(j).isWall()){
+				else if(!map.getTileAt(i,j).hasFood() && !map.getTileAt(i,j).isWall()){
 					output+=Parameters.PATH_CHAR;
 				}
-				else if(!mapArray.get(i).get(j).hasFood() && mapArray.get(i).get(j).isWall()){
+				else if(!map.getTileAt(i,j).hasFood() && map.getTileAt(i,j).isWall()){
 					output+=Parameters.WALL_CHAR;
 				}
 			}
