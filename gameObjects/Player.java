@@ -12,7 +12,7 @@ import lt.vu.mif.pacman.IO.Parameters;
 public class Player extends GameObject implements KeyListener{
 	
 	public static final long serialVersionUID = 1L;
-	private ArrayList<ArrayList<Tile>> map; // Map instance
+	private GameMap map; // Map instance
 	private PacmanGame gameInstance; // Game instance
 
 	/**
@@ -30,7 +30,7 @@ public class Player extends GameObject implements KeyListener{
 	 * @param mapInstance[Map]
 	 */
 	public void setMapInstance(GameMap mapInstance){
-		map = mapInstance.getMap();
+		map = mapInstance;
 	}
 	/**
 	 * Sets the instance of Game, needed to check the state of the game
@@ -60,31 +60,31 @@ public class Player extends GameObject implements KeyListener{
     	switch(direction){
     		case "left":
     			this.setFacing(3);
-    			if(this.getPosX()/Parameters.TILE_SIZE-1 >=0 && !map.get(this.getPosY()/Parameters.TILE_SIZE).get(this.getPosX()/Parameters.TILE_SIZE-1).isWall()){
+    			if(this.getPosX()/Parameters.TILE_SIZE-1 >=0 && !map.getTileAt(this.getPosY()/Parameters.TILE_SIZE,this.getPosX()/Parameters.TILE_SIZE-1).isWall()){
     				this.setPosX(this.getPosX()- Parameters.TILE_SIZE);
     			}
     			break;
     		case "right":
     			this.setFacing(1);
-    			if(this.getPosX()/Parameters.TILE_SIZE+1 < map.get(0).size() && !map.get(this.getPosY()/Parameters.TILE_SIZE).get(this.getPosX()/Parameters.TILE_SIZE+1).isWall()){
+    			if(this.getPosX()/Parameters.TILE_SIZE+1 < map.getWidth() && !map.getTileAt(this.getPosY()/Parameters.TILE_SIZE,this.getPosX()/Parameters.TILE_SIZE+1).isWall()){
     				this.setPosX(this.getPosX() + Parameters.TILE_SIZE);
     			}
     			break;
     		case "up":
     			this.setFacing(4);
-    			if(this.getPosY()/Parameters.TILE_SIZE-1 >=0 && !map.get(this.getPosY()/Parameters.TILE_SIZE-1).get(this.getPosX()/Parameters.TILE_SIZE).isWall()){
+    			if(this.getPosY()/Parameters.TILE_SIZE-1 >=0 && !map.getTileAt(this.getPosY()/Parameters.TILE_SIZE-1,this.getPosX()/Parameters.TILE_SIZE).isWall()){
     				this.setPosY(this.getPosY() - Parameters.TILE_SIZE);
     			}
     			break;
     		case "down":
     			this.setFacing(2);
-    			if(this.getPosY()/Parameters.TILE_SIZE+1 < map.size() && !map.get(this.getPosY()/Parameters.TILE_SIZE+1).get(this.getPosX()/Parameters.TILE_SIZE).isWall()){
+    			if(this.getPosY()/Parameters.TILE_SIZE+1 < map.getHeight() && !map.getTileAt(this.getPosY()/Parameters.TILE_SIZE+1,this.getPosX()/Parameters.TILE_SIZE).isWall()){
     	    		this.setPosY(this.getPosY() + Parameters.TILE_SIZE);
     			}
     			break;
     	}
 		this.repaint();
-		map.get(this.getPosY()/Parameters.TILE_SIZE).get(this.getPosX()/Parameters.TILE_SIZE).eat();
+		map.eatTileAt(this.getPosY()/Parameters.TILE_SIZE,this.getPosX()/Parameters.TILE_SIZE);
 		gameInstance.checkIfGameWon();
 		gameInstance.checkForCollision();
 		gameInstance.stateChanged();

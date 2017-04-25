@@ -80,6 +80,24 @@ public class GameMap extends JLabel implements Drawable{
 		this.gameInstance = gameInstance;
 	}
 	
+	
+	public Tile getTileAt(int y, int x){
+		return mainArray.get(y).get(x);
+	}
+	
+	public void eatTileAt(int y, int x){
+		mainArray.get(y).get(x).eat();
+	}
+	
+	public int getArrayWidth(){
+		return mainArray.get(0).size();
+	}
+	
+	public int getArrayHeight(){
+		return mainArray.size();
+	}
+	
+	
 	/**
 	 * Paint map
 	 * @param g - Graphics
@@ -139,9 +157,7 @@ public class GameMap extends JLabel implements Drawable{
     	return map;
     }
     
-    public ArrayList<ArrayList<Tile>> getMap(){
-    	return mainArray;
-    }
+
 
     /**
      * Resets f-and-g-scores of all the tiles
