@@ -45,6 +45,7 @@ public class PacmanGame {
 		renderer.add(map);
 		renderer.setLayer(map, 0);
 		renderer.add(mainPlayer);
+		mainPlayer.setActive(true);
 		renderer.setLayer(mainPlayer, 1);
 		for(int i = 0; i < allEnemies.size(); i++){
 			renderer.add(allEnemies.get(i));
@@ -59,7 +60,7 @@ public class PacmanGame {
 			allEnemies.get(i).setMapInstance(map);
 			allEnemies.get(i).setGameInstance(this);
 			allEnemies.get(i).setTarget(mainPlayer);
-			allEnemies.get(i).startLookingForPath();
+			allEnemies.get(i).setActive(true);
 		}
 		
 		
@@ -95,7 +96,7 @@ public class PacmanGame {
 	 */
 	public void createPlayer(int posX, int posY){
 		
-		mainPlayer =  (Player) GameObjectCreator.createGameObject("Player", posX,posY, Color.yellow);
+		mainPlayer =  (Player) GameObjectCreator.instantiateGameObject("Player", posX,posY, Color.yellow);
 		mainPlayer.setMapInstance(map);
 		mainPlayer.setGameInstance(this);
 	}
@@ -105,7 +106,7 @@ public class PacmanGame {
 	 * @param posY[int] - initial position of Enemy, Y coordinate
 	 */
 	public void createEnemy(int posX, int posY){
-		Enemy enemy  = (Enemy) GameObjectCreator.createGameObject("Enemy",posX, posY, Parameters.enemyColors[enemyCount++]);
+		Enemy enemy  = (Enemy) GameObjectCreator.instantiateGameObject("Enemy",posX, posY, Parameters.enemyColors[enemyCount++]);
 		allEnemies.add(enemy);
 	}
 	

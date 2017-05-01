@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 import lt.vu.mif.pacman.PacmanGame;
 import lt.vu.mif.pacman.IO.Parameters;
@@ -41,10 +40,21 @@ public class Player extends GameObject implements KeyListener{
 	}
 	
 	
+	public void setActive(boolean isActive){
+		this.active = isActive;
+	}
+	
+	public void drawItself(Graphics g){
+			g.setColor(this.getColor());
+			g.fillOval(this.getPosX(), this.getPosY(), 30, 30);
+		
+	}
+	
 	public void paintComponent(Graphics g){
-		g.setColor(this.getColor());
-		g.fillOval(this.getPosX(), this.getPosY(), 30, 30);
-		super.paintComponent(g);
+		if(active){
+			drawItself(g);
+			super.paintComponent(g);
+		}
 	}
 	
 	/**
@@ -95,27 +105,30 @@ public class Player extends GameObject implements KeyListener{
      * @param e[KeyEvent]
      */
     public void keyPressed(KeyEvent e)
-    {
-	        switch(e.getKeyCode())
-	        {
-	           case KeyEvent.VK_A:
-	           case KeyEvent.VK_LEFT:
-	              this.move("left");
-	              break;
-	           case KeyEvent.VK_D:
-	           case KeyEvent.VK_RIGHT:
-	              this.move("right");
-	              break;
-	           case KeyEvent.VK_W:   
-	           case KeyEvent.VK_UP:
-	               this.move("up");
-	               break;
-	           case KeyEvent.VK_S:
-	           case KeyEvent.VK_DOWN:
-	               this.move("down");
-	               break;
-	              
-	        }
+    {		
+    		if(active){
+    			switch(e.getKeyCode())
+    	        {
+    	           case KeyEvent.VK_A:
+    	           case KeyEvent.VK_LEFT:
+    	              this.move("left");
+    	              break;
+    	           case KeyEvent.VK_D:
+    	           case KeyEvent.VK_RIGHT:
+    	              this.move("right");
+    	              break;
+    	           case KeyEvent.VK_W:   
+    	           case KeyEvent.VK_UP:
+    	               this.move("up");
+    	               break;
+    	           case KeyEvent.VK_S:
+    	           case KeyEvent.VK_DOWN:
+    	               this.move("down");
+    	               break;
+    	              
+    	        }
+    		}
+	        
 
     }
 	

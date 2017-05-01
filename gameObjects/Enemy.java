@@ -17,7 +17,6 @@ public class Enemy extends GameObject{
 	private int moveTime = 400; // 0.4s
 	private int searchTime = 3000; // 3s
 	private Enemy thisInstance = this;
-	
 	/**
 	 * Constructor of a class Enemy, inherits fields from Creature
 	 * @param [int] startingX - initial starting position, coordinate X
@@ -48,9 +47,15 @@ public class Enemy extends GameObject{
 	}
 	
 	public void paintComponent(Graphics g){
+		if(active){
+			drawItself(g);
+			super.paintComponent(g);
+		}
+	}
+	
+	public void drawItself(Graphics g){
 		g.setColor(this.getColor());
 		g.fillRect(this.getPosX(), this.getPosY(), 30, 30);
-		super.paintComponent(g);
 	}
 	
 
@@ -59,7 +64,7 @@ public class Enemy extends GameObject{
 	 */
 	private Thread pathFindingThread = new Thread(new Runnable(){
 		public void run(){
-			while(pathFindingThread != null){
+			while(pathFindingThread != null && active){
 				thisInstance.findPathAStar();
 				try{
 					Thread.sleep(searchTime);
@@ -78,7 +83,7 @@ public class Enemy extends GameObject{
 	 */
 	private Thread pathFollowingThread = new Thread(new Runnable(){
 		public void run(){
-			while(pathFollowingThread != null){
+			while(pathFollowingThread != null && active){
 
 				
 				try{				
@@ -103,6 +108,17 @@ public class Enemy extends GameObject{
 	/**
 	 * Starts path following and finding threads
 	 */
+	
+	public void setActive(boolean isActive){
+		this.active = isActive;
+		if(isActive){
+			startLookingForPath();
+		}
+		else{
+			stopLookingForPath();
+		}
+	}
+	
 	public void startLookingForPath(){
 		
 		pathFindingThread.start();

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import lt.vu.mif.pacman.gameObjects.Enemy;
 import lt.vu.mif.pacman.gameObjects.GameMap;
 import lt.vu.mif.pacman.gameObjects.Player;
-import lt.vu.mif.pacman.gameObjects.Tile;
 
 public class ParametersIO {
 	

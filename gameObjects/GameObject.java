@@ -7,7 +7,7 @@ import lt.vu.mif.pacman.GUI.Drawable;
 import lt.vu.mif.pacman.IO.Parameters;
 
 
-public class GameObject extends JLabel implements Drawable{
+public abstract class GameObject extends JLabel implements Drawable{
 	/**
 	 * Getters and setters
 	 */
@@ -19,6 +19,11 @@ public class GameObject extends JLabel implements Drawable{
 	private int posY;
 	private Color color;
 	public static final long serialVersionUID = 1L;
+	public boolean active;
+	
+	public abstract void drawItself(Graphics g);
+	
+	public abstract void setActive(boolean isActive); 
 	
 	public GameObject(int x, int y, Color color){
 		this.posX = x;
