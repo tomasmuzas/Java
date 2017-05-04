@@ -5,7 +5,9 @@ import javax.swing.*;
 
 import lt.vu.mif.pacman.PacmanGame;
 import lt.vu.mif.pacman.GUI.Drawable;
+import lt.vu.mif.pacman.IO.FormatException;
 import lt.vu.mif.pacman.IO.Parameters;
+
 import java.awt.*;
 import java.io.*;
 import java.util.*;
@@ -23,7 +25,7 @@ public class GameMap extends JLabel implements Drawable{
 	 *  Map parser, creates Player or Enemy if found
 	 *  @param [String] name of a file to load the map from 
 	 */
-	public void parseMap(String fileName){
+	public void parseMap  (String fileName) throws FormatException{
 		String line = null;
 		try{
     		FileReader inputFile = new FileReader(fileName);
@@ -53,6 +55,9 @@ public class GameMap extends JLabel implements Drawable{
             			gameInstance.createEnemy(charCount*Parameters.TILE_SIZE,arrayIndex*Parameters.TILE_SIZE);
             			mainArray.get(arrayIndex).add(new Tile(i*Parameters.TILE_SIZE,arrayIndex*Parameters.TILE_SIZE,true,false));
             			PacmanGame.maxScore++;
+            		}
+            		else{
+            			throw new FormatException("Wrong Game Map Format. Unknown symbol "+line.charAt(i)+" on line "+(arrayIndex+1));
             		}
             		charCount++;
             	}

@@ -4,8 +4,10 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import lt.vu.mif.pacman.GUI.GUI;
+import lt.vu.mif.pacman.IO.FormatException;
 import lt.vu.mif.pacman.IO.Parameters;
 import lt.vu.mif.pacman.IO.ParametersIO;
 import lt.vu.mif.pacman.gameObjects.Enemy;
@@ -29,7 +31,14 @@ public class PacmanGame {
 	 */
 	public void start(String parametersPath){
 		
-		ParametersIO.readSettings(parametersPath); // read the settings from the file
+		try{
+			ParametersIO.readSettings(parametersPath); // read the settings from the file
+		}
+		catch(FormatException e){
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			System.exit(0);
+		}
+		
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 		
@@ -38,7 +47,14 @@ public class PacmanGame {
 		
 		map = new GameMap();
 		map.setGameInstance(this);
-		map.parseMap(Parameters.INPUT_PATH);
+		try{
+			map.parseMap(Parameters.INPUT_PATH);
+		}
+		catch(FormatException e){
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			System.exit(0);
+		}
+		
 		
 
 		

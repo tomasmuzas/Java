@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import lt.vu.mif.pacman.gameObjects.Enemy;
 import lt.vu.mif.pacman.gameObjects.GameMap;
 import lt.vu.mif.pacman.gameObjects.Player;
@@ -17,7 +19,7 @@ public class ParametersIO {
 	 * Reads parameters from the certain file
 	 * @param fileName[String] - path of the parameter file
 	 */
-	public static void readSettings(String fileName){
+	public static void readSettings(String fileName) throws FormatException{
 		String line = null;
 		try{
     		FileReader inputFile = new FileReader(fileName);
@@ -59,17 +61,18 @@ public class ParametersIO {
     					Parameters.INPUT_PATH = parameter[1];
     					break;
     				default:
-    					break;
+    					input.close();
+    					throw new FormatException("Unknown Parameter Format! On: "+parameter[0]);
     			}
     		}
             input.close();
     	}
 		catch(FileNotFoundException ex) {
-          System.out.println("Unable to open config file '" + fileName + "'");
+          JOptionPane.showMessageDialog(null, "Unable to open config file '" + fileName + "'");
           System.exit(0);
 		}
         catch(IOException ex) {
-            System.out.println("Error reading config file '" + fileName + "'");
+        	JOptionPane.showMessageDialog(null,"Error reading config file '" + fileName + "'");
             System.exit(0);
         }		
 	}
